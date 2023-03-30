@@ -27,10 +27,15 @@ class FopSecurity extends Module
         parent::__construct();
 
         $this->displayName = 'FoP Security';
-        $this->description = $this->l('Set tools to secure your PrestaShop.');
+        $this->description = $this->l('Set of tools to secure your PrestaShop.');
         $this->ps_versions_compliancy = [
             'min' => '1.6.1.0',
             'max' => _PS_VERSION_,
         ];
+    }
+
+    public function getContent()
+    {
+        Tools::redirectAdmin($this->context->link->getAdminLink('AdminFopSecurityConfiguration'));
     }
 }
