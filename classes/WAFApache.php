@@ -31,8 +31,8 @@ class WAFApache
         $admin_dir = basename(_PS_ADMIN_DIR_);
 
         if (Configuration::get('FOPSECURITY_BLOCK_DIRECTORYTRAVERSAL')) {
-            $this->htaccessRules .= 'RewriteCond %{QUERY_STRING} \.\.(/|%2F) [NC]' . "\n";
-            $this->htaccessRules .= 'RewriteCond %{REQUEST_URI} !^' . preg_quote($admin_dir) . '/ [NC]' . "\n";
+            $this->htaccessRules .= 'RewriteCond %{QUERY_STRING} \.\.(/|%2F)' . "\n";
+            $this->htaccessRules .= 'RewriteCond %{REQUEST_URI} !/' . preg_quote($admin_dir) . '/' . "\n";
             $this->htaccessRules .= 'RewriteRule .* - [F,L]' . "\n\n";
         }
         if (Configuration::get('FOPSECURITY_BLOCK_PHPUNITFOLDER')) {
