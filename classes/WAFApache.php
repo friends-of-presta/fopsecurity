@@ -25,7 +25,7 @@ class WAFApache
      *
      * @return void
      */
-    public function generateWafRules():void
+    public function generateWafRules(): void
     {
         // admin dir
         $admin_dir = basename(_PS_ADMIN_DIR_);
@@ -33,16 +33,24 @@ class WAFApache
         if (Configuration::get('FOPSECURITY_BLOCK_DIRECTORYTRAVERSAL')) {
             $this->htaccessRules .= 'RewriteCond %{QUERY_STRING} \.\./ [NC]' . "\n";
             $this->htaccessRules .= 'RewriteCond %{REQUEST_URI} !^' . preg_quote($admin_dir) . '/ [NC]' . "\n";
-            $this->htaccessRules .= 'RewriteRule .* - [F,L]' . "\n";
+            $this->htaccessRules .= 'RewriteRule .* - [F,L]' . "\n\n";
+        }
+        if (Configuration::get('FOPSECURITY_BLOCK_PHPUNITFOLDER')) {
+            $this->htaccessRules .= 'RewriteRule ^modules/.*phpunit - [F,L]' . "\n\n";
+        }
+        if (Configuration::get('FOPSECURITY_BLOCK_KNOWNMALWARES')) {
+            $this->htaccessRules .= 'RewriteCond %{REQUEST_URI} XsamXadoo [NC,OR]' . "\n";
+            $this->htaccessRules .= 'RewriteCond %{REQUEST_URI} Xsam_Xadoo [NC,OR]' . "\n";
+            $this->htaccessRules .= 'RewriteRule .* - [F,L]' . "\n\n";
         }
     }
 
     /**
      * Write fop security section in .htaccess at the begening of the file or in already present section
      *
-     * @return boolean
+     * @return bool
      */
-    public function writeHtaccessSection():bool
+    public function writeHtaccessSection(): bool
     {
         // apachewaf
         $regExpForSection = '/^(.*)# --fops-start--.*# --fops-end--[^\n]*[\n]*(.*)$/s';

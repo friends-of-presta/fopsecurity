@@ -40,6 +40,18 @@ class AdminFopSecurityConfigurationController extends ModuleAdminController
                         'title' => $this->l('Block directory traversal'),
                         'cast' => 'boolval',
                     ],
+                    'FOPSECURITY_BLOCK_PHPUNITFOLDER' => [
+                        'type' => 'bool',
+                        'title' => $this->l('Block phpunit folder'),
+                        'desc' => $this->l('Acces to phpunit folders in modules is forbidden.') . ' <a href="https://build.prestashop-project.org/news/2020/critical-security-vulnerability-in-prestashop-modules/">source</a>',
+                        'cast' => 'boolval',
+                    ],
+                    'FOPSECURITY_BLOCK_KNOWNMALWARES' => [
+                        'type' => 'bool',
+                        'title' => $this->l('Block known malwares'),
+                        'desc' => $this->l('XsamXadoo, ...'),
+                        'cast' => 'boolval',
+                    ],
                 ],
                 'submit' => [
                     'title' => $this->l('Save'),
