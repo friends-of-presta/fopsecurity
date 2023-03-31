@@ -39,6 +39,8 @@ class WAFApache
             $this->htaccessRules .= 'RewriteRule ^modules/.*phpunit - [F,L]' . "\n\n";
         }
         if (Configuration::get('FOPSECURITY_BLOCK_KNOWNMALWARES')) {
+            $this->htaccessRules .= 'RewriteCond %{REQUEST_URI} ^app/Mage\.php.* [NC,OR]' . "\n";
+            $this->htaccessRules .= 'RewriteCond %{REQUEST_URI} 0x666\.php [NC,OR]' . "\n";
             $this->htaccessRules .= 'RewriteCond %{REQUEST_URI} XsamXadoo [NC,OR]' . "\n";
             $this->htaccessRules .= 'RewriteCond %{REQUEST_URI} Xsam_Xadoo [NC]' . "\n";
             $this->htaccessRules .= 'RewriteRule .* - [F,L]' . "\n\n";
