@@ -40,7 +40,7 @@ class WAFApache
         }
         if (Configuration::get('FOPSECURITY_BLOCK_KNOWNMALWARES')) {
             $this->htaccessRules .= 'RewriteCond %{REQUEST_URI} XsamXadoo [NC,OR]' . "\n";
-            $this->htaccessRules .= 'RewriteCond %{REQUEST_URI} Xsam_Xadoo [NC,OR]' . "\n";
+            $this->htaccessRules .= 'RewriteCond %{REQUEST_URI} Xsam_Xadoo [NC]' . "\n";
             $this->htaccessRules .= 'RewriteRule .* - [F,L]' . "\n\n";
         }
     }
