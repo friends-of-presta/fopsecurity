@@ -41,6 +41,7 @@ class WAFApache
             $this->htaccessRules .= 'RewriteRule ^modules/.*phpunit - [F,L]' . "\n\n";
         }
         if (Configuration::get('FOPSECURITY_BLOCK_KNOWNMALWARES')) {
+            $this->htaccessRules .= 'RewriteCond %{REQUEST_FILENAME} bajatx [NC,OR]' . "\n";
             $this->htaccessRules .= 'RewriteCond %{REQUEST_FILENAME} blm\.php$ [NC,OR]' . "\n";
             $this->htaccessRules .= 'RewriteCond %{REQUEST_URI} ^app/Mage\.php [NC,OR]' . "\n";
             $this->htaccessRules .= 'RewriteCond %{REQUEST_FILENAME} 0x666\.php$ [NC,OR]' . "\n";
