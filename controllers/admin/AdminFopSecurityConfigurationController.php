@@ -28,6 +28,11 @@ class AdminFopSecurityConfigurationController extends ModuleAdminController
 
         parent::__construct();
 
+        // no shop specific configuration
+        if (Shop::isFeatureActive()) {
+            Shop::setContext(Shop::CONTEXT_ALL);
+        }
+        
         $this->fields_options = [
             'apachewaf' => [
                 'title' => $this->l('Apache WAF'),
